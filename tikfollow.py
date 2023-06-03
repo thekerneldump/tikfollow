@@ -35,23 +35,16 @@ def getuserstats():
     users = loadusers()
     result1 = procuser(users[0])
     result2 = procuser(users[1])
+    comment1 = ""
+    comment2 = ""
     diff1 = int(result1["followerCount"]) - int(result2["followerCount"])
     if diff1 > 0:
         comment1 = f'({diff1} more than {result2["name"]})'
-    if diff1 < 0:
-        comment1 = f'({diff1} fewer than {result2["name"]})'
-        diff1 = diff1 * (-1)
-    if diff1 == 0:
-        comment1 = ""
 
     diff2 = int(result2["followerCount"]) - int(result1["followerCount"])
     if diff2 > 0:
         comment2 = f'({diff2} more than {result1["name"]})'
-    if diff2 < 0:
-        comment2 = f'({diff2} fewer than {result1["name"]})'
-        diff2 = diff2 * (-1)
-    if diff2 == 0:
-        comment2 = ""
+
     slackmsg = f'{result1["name"]}: {result1["followerCount"]} {comment1}\n'
     slackmsg += f'{result2["name"]}: {result2["followerCount"]} {comment2}'
     return slackmsg
